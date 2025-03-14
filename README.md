@@ -23,7 +23,7 @@ B. Functional Requirements:
 
 C. Solution Design:
 
-   1.The solution uses:
+   1. The solution uses:
    
      * A lock to protect access to shared station data.
      * Condition variables for synchronizing train arrival and passenger boarding.
