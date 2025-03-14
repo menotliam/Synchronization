@@ -29,6 +29,7 @@ C. Solution Design:
      * Condition variables for synchronizing train arrival and passenger boarding.
      * A counter-based approach to track available seats and waiting passengers.
    2. Implementation Details:
+
       a. The following functions are implemented:
       
           * station_init(struct station *station): Initializes the station structure.
@@ -61,18 +62,22 @@ C. Solution Design:
      * Locks to protect access to shared reaction data.
      * Multiple condition variables (cv_h, cv_o, cv_barrier) to synchronize thread execution efficiently.
      * A barrier mechanism to ensure exactly three atoms synchronize before proceeding.
+
    2. Implementation Details:
+
       a. The following functions are implemented:
       
           * reaction_init(struct reaction *r): Initializes the reaction synchronization structure.
           * reaction_h(struct reaction *r): Blocks hydrogen threads until they can react.
           * reaction_o(struct reaction *r): Blocks oxygen threads until they can react.
           * make_water(): Called exactly once per valid combination (2H + 1O) to simulate water formation.
+
       b. Optimizations for Speed:
       
           * Separate condition variables (cv_h and cv_o) ensure that only the required threads wake up, reducing unnecessary wakeups and contention.
           * Barrier synchronization prevents any thread from proceeding before all required atoms are ready.
           * Efficient signaling (cond_signal instead of cond_broadcast) reduces CPU overhead.
+
       c. Key Challenges Solved:
       
           * Avoiding deadlocks: Ensuring hydrogen and oxygen atoms wait in a coordinated manner.
