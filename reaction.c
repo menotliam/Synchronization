@@ -6,7 +6,6 @@
 void make_water();
 
 struct reaction {
-	// FILL ME IN
        struct lock lock;
        struct condition cv_h;
        struct condition cv_o;
@@ -21,7 +20,6 @@ struct reaction {
 void
 reaction_init(struct reaction *reaction)
 {
-	// FILL ME IN
        lock_init(&reaction->lock);
        cond_init(&reaction->cv_h);
        cond_init(&reaction->cv_o);
@@ -36,7 +34,6 @@ reaction_init(struct reaction *reaction)
 void
 reaction_h(struct reaction *reaction)
 {
-	// FILL ME IN
        lock_acquire(&reaction->lock);
        int is_leader = 0;
        reaction->h_count++;
@@ -62,7 +59,6 @@ reaction_h(struct reaction *reaction)
 void
 reaction_o(struct reaction *reaction)
 {
-	// FILL ME IN
        lock_acquire(&reaction->lock);
        int is_leader = 0;
        reaction->o_count++;
@@ -85,6 +81,7 @@ reaction_o(struct reaction *reaction)
        if(is_leader) make_water();
 }
 
+//Support function
 void
 barrier_wait(struct reaction *reaction)
 {
