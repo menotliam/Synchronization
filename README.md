@@ -15,6 +15,7 @@ CalTrain has automated its trains and passengers (now robots). Each train and pa
 B. Functional Requirements:
     * When a train arrives at the station, it calls station_load_train(station, count), where count is the number of available seats.
     * Passenger robots call station_wait_for_train(station) when they are ready to board, waiting for an available seat.
+    
     * Once a passenger boards a train, it calls station_on_board(station) to notify the train that it has taken a seat.
     * The train must not depart until it is full or there are no more waiting passengers.
     * Multiple passengers must be able to board simultaneously.
