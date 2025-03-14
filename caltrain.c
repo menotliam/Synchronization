@@ -1,7 +1,6 @@
 #include "pintos_thread.h"
 
 struct station {
-	// FILL ME IN
        struct lock lock;
        struct condition cond_train;
        struct condition cond_passenger;
@@ -13,7 +12,6 @@ struct station {
 void
 station_init(struct station *station)
 {
-	// FILL ME IN
        lock_init(&station->lock);
        cond_init(&station->cond_train);
        cond_init(&station->cond_passenger);
@@ -25,7 +23,6 @@ station_init(struct station *station)
 void
 station_load_train(struct station *station, int count)
 {
-	// FILL ME IN
        lock_acquire(&station->lock);
        station->available = count;
        cond_broadcast(&station->cond_train, &station->lock);
@@ -39,7 +36,6 @@ station_load_train(struct station *station, int count)
 void
 station_wait_for_train(struct station *station)
 {
-	// FILL ME IN
        lock_acquire(&station->lock);
        station->waiting++;
        while(station->available == 0){
@@ -54,7 +50,6 @@ station_wait_for_train(struct station *station)
 void
 station_on_board(struct station *station)
 {
-	// FILL ME IN
        lock_acquire(&station->lock);
        station->boarding--;
        if(station->boarding == 0 && (station->available == 0 || station->waiting == 0)){
