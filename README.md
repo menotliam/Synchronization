@@ -7,7 +7,7 @@ Overview
 2. Chemical Reaction Synchronization (Water Formation)
 * Each problem requires proper synchronization mechanisms to ensure orderly execution without race conditions, deadlocks, or busy-waiting.
 
-@ Problem 1: CalTrain Passenger Synchronization
+# Problem 1: CalTrain Passenger Synchronization
 
 A. Problem Description:
 CalTrain has automated its trains and passengers (now robots). Each train and passenger is represented as a thread. The goal is to synchronize train boarding in an orderly manner using condition variables and locks.
@@ -42,7 +42,7 @@ C. Solution Design:
           * Using targeted signaling (cond_signal instead of cond_broadcast) to reduce context switches.
           * Ensuring a train departs only when the right conditions are met.
           
-@ Problem 2: Chemical Reaction Synchronization (Water Formation)
+# Problem 2: Chemical Reaction Synchronization (Water Formation)
 
 A. Problem Description:
 In this problem, we synchronize chemical reactions to form water molecules (H₂O). Each atom (Hydrogen or Oxygen) is represented by a thread. The goal is to ensure exactly two hydrogen atoms and one oxygen atom react together to form one molecule of water.
@@ -84,14 +84,14 @@ C. Solution Design:
           * Preventing starvation: Ensuring all atoms eventually react and no thread waits indefinitely.
           * Minimizing contention: Using efficient wake-up strategies to avoid unnecessary thread blocking.
 
-@ Testing The Code
+# Testing The Code
 
     * These programs have been tested on the myth linux cluster and OS X and should be pretty portable to other UNIX-like OSes.
     * Run : 'make run' to run the testing program.
     * Testing program will run both problems' testcases.
     * Each problem's testcase will be in caltrain-runner.c & reaction-runner.c file.
 
-@ Conclusion
+# Conclusion
 
 These solutions demonstrate proper use of locks and condition variables to solve real-world synchronization challenges. They ensure efficient thread coordination without busy-waiting, race conditions, or deadlocks.
 
