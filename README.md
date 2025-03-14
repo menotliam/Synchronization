@@ -22,6 +22,7 @@ B. Functional Requirements:
     * Busy-waiting must be avoided.
 
 C. Solution Design:
+
    1.The solution uses:
    
      * A lock to protect access to shared station data.
@@ -54,38 +55,44 @@ B. Functional Requirements:
     * No busy-waiting is allowed.
 
 C. Solution Design:
-    1. The solution utilizes:
-        * Locks to protect access to shared reaction data.
-        * Multiple condition variables (cv_h, cv_o, cv_barrier) to synchronize thread execution efficiently.
-        * A barrier mechanism to ensure exactly three atoms synchronize before proceeding.
-    2. Implementation Details
+
+   1. The solution utilizes:
+
+     * Locks to protect access to shared reaction data.
+     * Multiple condition variables (cv_h, cv_o, cv_barrier) to synchronize thread execution efficiently.
+     * A barrier mechanism to ensure exactly three atoms synchronize before proceeding.
+   2. Implementation Details:
       a. The following functions are implemented:
+      
           * reaction_init(struct reaction *r): Initializes the reaction synchronization structure.
           * reaction_h(struct reaction *r): Blocks hydrogen threads until they can react.
           * reaction_o(struct reaction *r): Blocks oxygen threads until they can react.
           * make_water(): Called exactly once per valid combination (2H + 1O) to simulate water formation.
-      b. Optimizations for Speed
+      b. Optimizations for Speed:
+      
           * Separate condition variables (cv_h and cv_o) ensure that only the required threads wake up, reducing unnecessary wakeups and contention.
           * Barrier synchronization prevents any thread from proceeding before all required atoms are ready.
           * Efficient signaling (cond_signal instead of cond_broadcast) reduces CPU overhead.
-      c. Key Challenges Solved
+      c. Key Challenges Solved:
+      
           * Avoiding deadlocks: Ensuring hydrogen and oxygen atoms wait in a coordinated manner.
           * Preventing starvation: Ensuring all atoms eventually react and no thread waits indefinitely.
           * Minimizing contention: Using efficient wake-up strategies to avoid unnecessary thread blocking.
 
 @ Testing The Code
 
-* These programs have been tested on the myth linux cluster and OS X and should be pretty portable to other UNIX-like OSes.
-* Run : 'make run' to run the testing program.
-* Testing program will run both problems' testcases.
-* Each problem's testcase will be in caltrain-runner.c & reaction-runner.c file.
+    * These programs have been tested on the myth linux cluster and OS X and should be pretty portable to other UNIX-like OSes.
+    * Run : 'make run' to run the testing program.
+    * Testing program will run both problems' testcases.
+    * Each problem's testcase will be in caltrain-runner.c & reaction-runner.c file.
 
 @ Conclusion
 
 These solutions demonstrate proper use of locks and condition variables to solve real-world synchronization challenges. They ensure efficient thread coordination without busy-waiting, race conditions, or deadlocks.
 
 Further Enhancements
-* Extend CalTrain to support multiple simultaneous trains.
-* Optimize the Chemical Reaction solution further with adaptive thread pooling.
-* For any questions or improvements, feel free to contribute!
+
+    * Extend CalTrain to support multiple simultaneous trains.
+    * Optimize the Chemical Reaction solution further with adaptive thread pooling.
+    * For any questions or improvements, feel free to contribute!
           
