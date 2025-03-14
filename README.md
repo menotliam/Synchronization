@@ -28,6 +28,7 @@ C. Solution Design:
      * A lock to protect access to shared station data.
      * Condition variables for synchronizing train arrival and passenger boarding.
      * A counter-based approach to track available seats and waiting passengers.
+
    2. Implementation Details:
 
       a. The following functions are implemented:
