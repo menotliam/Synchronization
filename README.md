@@ -13,9 +13,9 @@ A. Problem Description:
 CalTrain has automated its trains and passengers (now robots). Each train and passenger is represented as a thread. The goal is to synchronize train boarding in an orderly manner using condition variables and locks.
 
 B. Functional Requirements:
+
     * When a train arrives at the station, it calls station_load_train(station, count), where count is the number of available seats.
     * Passenger robots call station_wait_for_train(station) when they are ready to board, waiting for an available seat.
-    
     * Once a passenger boards a train, it calls station_on_board(station) to notify the train that it has taken a seat.
     * The train must not depart until it is full or there are no more waiting passengers.
     * Multiple passengers must be able to board simultaneously.
@@ -23,16 +23,19 @@ B. Functional Requirements:
 
 C. Solution Design:
    1.The solution uses:
+   
      * A lock to protect access to shared station data.
      * Condition variables for synchronizing train arrival and passenger boarding.
      * A counter-based approach to track available seats and waiting passengers.
    2. Implementation Details:
       a. The following functions are implemented:
+      
           * station_init(struct station *station): Initializes the station structure.
           * station_load_train(struct station *station, int count): Waits until the train is fully loaded or no more passengers are waiting.
           * station_wait_for_train(struct station *station): Blocks passengers until a train with available seats arrives.
           * station_on_board(struct station *station): Signals that a passenger has taken a seat, allowing the train to track remaining passengers.
       b. The solution ensures efficient synchronization by:
+      
           * Using condition variables to avoid busy-waiting.
           * Using targeted signaling (cond_signal instead of cond_broadcast) to reduce context switches.
           * Ensuring a train departs only when the right conditions are met.
@@ -43,6 +46,7 @@ A. Problem Description:
 In this problem, we synchronize chemical reactions to form water molecules (H₂O). Each atom (Hydrogen or Oxygen) is represented by a thread. The goal is to ensure exactly two hydrogen atoms and one oxygen atom react together to form one molecule of water.
 
 B. Functional Requirements:
+
     * Hydrogen threads call reaction_h(struct reaction *r) when they are ready to bond.
     * Oxygen threads call reaction_o(struct reaction *r) when they are ready to bond.
     * When two H atoms and one O atom are available, one thread calls make_water() exactly once.
